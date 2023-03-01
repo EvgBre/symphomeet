@@ -1,0 +1,18 @@
+{
+    "-NPPqGTJhSDJvomCjLse":{
+        "firebaseKey":"-NPPqGTJhSDJvomCjLse",
+        "name":"Evan's Quartet Jam",
+        "chamber":"Quartet",
+        "description":"I love to play quartet music, and I am inviting anyone to come join! Bring your favorite repertoire.",
+        "public":true,
+        "uid":"d23InJgj40aLfwFgvLCL4jgqS9f2"
+    },
+    "-NPPqGTM76qOmfVheIp9":{
+        "firebaseKey":"-NPPqGTM76qOmfVheIp9",
+        "name":"Evan's Trio Showcase",
+        "chamber":"Trio",
+        "description":"I am wanting to showcase a Trio composed by a friend of mine!",
+        "public":false,
+        "uid":"d23InJgj40aLfwFgvLCL4jgqS9f2"
+    }
+    }
