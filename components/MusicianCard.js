@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card } from 'bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
 import { deleteMusicianAds } from '../api/mergedData';
 
