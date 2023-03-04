@@ -1,6 +1,6 @@
-import client from '../utils/client';
+import { clientCredentials } from '../utils/client';
 
-const endpoint = client.databaseURL;
+const endpoint = clientCredentials.databaseURL;
 
 const getAds = (uid) => new Promise((resolve, reject) => {
   // eslint-disable-next-line no-template-curly-in-string

@@ -1,6 +1,6 @@
-import client from '../utils/client';
+import { clientCredentials } from '../utils/client';
 
-const endpoint = client.databaseURL;
+const endpoint = clientCredentials.databaseURL;
 
 const getMusicians = (uid) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/musicians.json?orderBy="uid"&equalTo="${uid}"`, {
@@ -66,7 +66,7 @@ const updateMusician = (payload) => new Promise((resolve, reject) => {
 });
 
 const getMusicianAds = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/ads.json?orderBy="muscian_id"&equalTo="${firebaseKey}"`, {
+  fetch(`${endpoint}/ads.json?orderBy="musician_id"&equalTo="${firebaseKey}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
