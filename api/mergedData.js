@@ -1,5 +1,5 @@
-import { getSingleMusician, getMusicianAds } from './musicianData';
-import { getSingleAd } from './adData';
+import { getSingleMusician, getMusicianAds, deleteSingleMusician } from './musicianData';
+import { deleteAd, getSingleAd } from './adData';
 
 const getAdDetails = (firebaseKey) => new Promise((resolve, reject) => {
   getSingleAd(firebaseKey).then((adObj) => {
@@ -7,10 +7,21 @@ const getAdDetails = (firebaseKey) => new Promise((resolve, reject) => {
   }).catch(reject);
 });
 
-const getMusicianDetails = (firebaseKey) => new Promise((resolve, reject) => {
+const viewMusicianDetails = (firebaseKey) => new Promise((resolve, reject) => {
   getSingleMusician(firebaseKey).then((musicianObject) => {
     getMusicianAds(firebaseKey).then((adsArray) => resolve({ ...musicianObject, adsArray }));
   }).catch(reject);
 });
 
-export { getAdDetails, getMusicianDetails };
+const deleteMusicianAds = (uid) => new Promise((resolve, reject) => {
+  getMusicianAds(uid).then((AdsArray) => {
+    console.warn(AdsArray, 'Author Books');
+    const deleteAdPromises = AdsArray.map((ad) => deleteAd(ad.firebaseKey));
+
+    Promise.all(deleteAdPromises).then(() => {
+      deleteSingleMusician(uid).then(resolve);
+    });
+  }).catch((error) => reject(error));
+});
+
+export { getAdDetails, viewMusicianDetails, deleteMusicianAds };
