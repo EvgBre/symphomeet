@@ -1,7 +1,7 @@
 import { getSingleMusician, getMusicianAds, deleteSingleMusician } from './musicianData';
 import { deleteAd, getSingleAd } from './adData';
 
-const getAdDetails = (firebaseKey) => new Promise((resolve, reject) => {
+const viewAdDetails = (firebaseKey) => new Promise((resolve, reject) => {
   getSingleAd(firebaseKey).then((adObj) => {
     getSingleMusician(adObj.musician_id).then((musicianObject) => resolve({ ...adObj, musicianObject }));
   }).catch(reject);
@@ -24,4 +24,4 @@ const deleteMusicianAds = (uid) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export { getAdDetails, viewMusicianDetails, deleteMusicianAds };
+export { viewAdDetails, viewMusicianDetails, deleteMusicianAds };
