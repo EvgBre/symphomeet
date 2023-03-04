@@ -14,7 +14,7 @@ const getMusicians = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const createMusicians = (payload) => new Promise((resolve, reject) => {
+const createMusician = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/musicians.json`, {
     method: 'POST',
     headers: {
@@ -78,7 +78,7 @@ const getMusicianAds = (firebaseKey) => new Promise((resolve, reject) => {
 });
 export {
   getMusicians,
-  createMusicians,
+  createMusician,
   getSingleMusician,
   deleteSingleMusician,
   updateMusician,
