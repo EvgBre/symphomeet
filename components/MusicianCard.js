@@ -15,7 +15,6 @@ export default function MusicianCard({ musicianObj, onUpdate }) {
       <Card.Img variant="top" src={musicianObj.image} alt={musicianObj.name} style={{ height: '400px' }} />
       <Card.Body>
         <Card.Title>{musicianObj.name}</Card.Title>
-        <Card.Title>{musicianObj.name}</Card.Title>
         <Card.Text>{musicianObj.instrument}</Card.Text>
         <Card.Text>{musicianObj.bio}</Card.Text>
         {/* DYNAMIC LINK TO VIEW THE BOOK DETAILS  */}

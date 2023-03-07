@@ -2,8 +2,8 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-const getMusicians = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/musicians.json?orderBy="uid"&equalTo="${uid}"`, {
+const getMusicians = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/musicians.json`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -12,6 +12,23 @@ const getMusicians = (uid) => new Promise((resolve, reject) => {
     .then((response) => response.json())
     .then((data) => resolve(Object.values(data)))
     .catch(reject);
+});
+
+const getMusicianLogin = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/musicians.json?orderBy="uid"&equalTo="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    }).catch(reject);
 });
 
 const createMusician = (payload) => new Promise((resolve, reject) => {
@@ -83,4 +100,5 @@ export {
   deleteSingleMusician,
   updateMusician,
   getMusicianAds,
+  getMusicianLogin,
 };

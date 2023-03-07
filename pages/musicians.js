@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { getMusicians } from '../api/musicianData';
-import { useAuth } from '../utils/context/authContext';
+// import { useAuth } from '../utils/context/authContext';
 import MusicianCard from '../components/MusicianCard';
 
 export default function ShowMusicians() {
-  const { user } = useAuth();
   const [musicians, setMusicians] = useState([]);
 
   const getAllMusicians = () => {
-    getMusicians(user.uid).then(setMusicians);
+    getMusicians().then(setMusicians);
   };
 
   useEffect(() => {
