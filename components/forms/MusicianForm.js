@@ -5,25 +5,23 @@ import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/context/authContext';
-import { createMusician, updateMusician } from '../../api/musicianData';
+import { createMusician, getMusicianLogin, updateMusician } from '../../api/musicianData';
 
 const initialState = {
-  firebaseKey: '',
   name: '',
   bio: '',
   image: '',
   instrument: '',
-  uid: '',
 };
 
 export default function MusicianForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
   const router = useRouter();
-  const { user } = useAuth();
+  const { setUser, uid } = useAuth();
 
   useEffect(() => {
     if (obj.firebaseKey) setFormInput(obj);
-  }, [obj, user]);
+  }, [obj]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,11 +35,17 @@ export default function MusicianForm({ obj }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       updateMusician(formInput)
-        .then(() => router.push(`/musician/${obj.firebaseKey}`));
+        .then(() => router.push('/'));
     } else {
-      const payload = { ...formInput, uid: user.uid };
-      createMusician(payload).then(() => {
-        router.push('/musicians');
+      const payload = { ...formInput, uid };
+      createMusician(payload).then(({ name }) => {
+        const patchPayload = { firebaseKey: name };
+        updateMusician(patchPayload).then(() => {
+          getMusicianLogin(uid).then((userData) => {
+            setUser(userData);
+            router.push('/');
+          });
+        });
       });
     }
   };
