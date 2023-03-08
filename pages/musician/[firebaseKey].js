@@ -24,7 +24,7 @@ export default function ViewMusician() {
       <div className="d-flex flex-column">
         <img src={musicianDetails.image} alt={musicianDetails.name} style={{ width: '300px' }} />
       </div>
-      <div className="text-white ms-5 details">
+      <div className="text-black ms-5 details">
         <h5>
           {musicianDetails.musicianObject?.name}
         </h5>
@@ -32,8 +32,8 @@ export default function ViewMusician() {
       </div>
       <hr />
       <div className="d-flex flex-wrap">
-        {musicianDetails.books?.map((book) => (
-          <AdCard key={book.firebaseKey} bookObj={book} onUpdate={viewMusicianAds} />
+        {musicianDetails.ads?.map((ad) => (
+          <AdCard key={ad.firebaseKey} adObj={ad} onUpdate={viewMusicianAds} />
         ))}
       </div>
     </div>

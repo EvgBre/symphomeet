@@ -15,14 +15,11 @@ export default function ViewAd() {
 
   return (
     <div className="mt-5 d-flex flex-wrap">
-      <div className="d-flex flex-column">
-        <img src={adDetails.image} alt={adDetails.title} style={{ width: '300px' }} />
-      </div>
       <div className="text-white ms-5 details">
         <h5>
           {adDetails.name} Created by {adDetails.musicianObject?.name}
         </h5>
-        Preferred Chamber: <p>{adDetails.musicianObject.chamber}</p>
+        Preferred Chamber: <p>{adDetails.musicianObject?.chamber}</p>
         <p>{adDetails.description || ''}</p>
       </div>
     </div>
