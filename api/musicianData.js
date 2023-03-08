@@ -45,7 +45,6 @@ const createMusician = (payload) => new Promise((resolve, reject) => {
 });
 
 const getSingleMusician = (firebaseKey) => new Promise((resolve, reject) => {
-  // eslint-disable-next-line no-template-curly-in-string
   fetch(`${endpoint}/musicians/${firebaseKey}.json`, {
     method: 'GET',
     headers: {
@@ -53,7 +52,7 @@ const getSingleMusician = (firebaseKey) => new Promise((resolve, reject) => {
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve((data)))
+    .then((data) => resolve(data))
     .catch(reject);
 });
 
@@ -83,7 +82,7 @@ const updateMusician = (payload) => new Promise((resolve, reject) => {
 });
 
 const getMusicianAds = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/ads.json?orderBy="musician_id"&equalTo="${firebaseKey}"`, {
+  fetch(`${endpoint}/ads.json?orderBy="uid"&equalTo="${firebaseKey}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
