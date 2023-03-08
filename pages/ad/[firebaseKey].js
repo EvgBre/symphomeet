@@ -8,18 +8,18 @@ export default function ViewAd() {
   const router = useRouter();
 
   const { firebaseKey } = router.query;
-
+  console.warn(adDetails);
   useEffect(() => {
     viewAdDetails(firebaseKey).then(setAdDetails);
   }, [firebaseKey]);
 
   return (
     <div className="mt-5 d-flex flex-wrap">
-      <div className="text-white ms-5 details">
+      <div className="text-black ms-5 details">
         <h5>
           {adDetails.name} Created by {adDetails.musicianObject?.name}
         </h5>
-        Preferred Chamber: <p>{adDetails.musicianObject?.chamber}</p>
+        Preferred Chamber: <p>{adDetails?.chamber}</p>
         <p>{adDetails.description || ''}</p>
       </div>
     </div>

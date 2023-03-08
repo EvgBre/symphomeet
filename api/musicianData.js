@@ -44,16 +44,21 @@ const createMusician = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSingleMusician = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/musicians/${firebaseKey}.json`, {
+const getSingleMusician = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/musicians.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(data))
-    .catch(reject);
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    }).catch(reject);
 });
 
 const deleteSingleMusician = (firebaseKey) => new Promise((resolve, reject) => {
