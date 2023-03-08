@@ -3,7 +3,7 @@ import { deleteAd, getSingleAd } from './adData';
 
 const viewAdDetails = (adFirebaseKey) => new Promise((resolve, reject) => {
   getSingleAd(adFirebaseKey).then((adObj) => {
-    getSingleMusician(adObj.firebaseKey).then((musicianObject) => resolve({ ...adObj, musicianObject }));
+    getSingleMusician(adObj.uid).then((musicianObject) => resolve({ ...adObj, musicianObject }));
   }).catch(reject);
 });
 

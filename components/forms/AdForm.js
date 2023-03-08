@@ -5,7 +5,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { createAd, updateAd } from '../../api/adData';
+import { createAd, getSingleAd, updateAd } from '../../api/adData';
 
 const initialState = {
   name: '',
@@ -17,11 +17,11 @@ const initialState = {
 function AdForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
   const router = useRouter();
-  const { user } = useAuth();
+  const { setUser, uid } = useAuth();
 
   useEffect(() => {
     if (obj.firebaseKey) setFormInput(obj);
-  }, [obj, user]);
+  }, [obj, uid]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,9 +37,15 @@ function AdForm({ obj }) {
       updateAd(formInput)
         .then(() => router.push(`/ad/${obj.firebaseKey}`));
     } else {
-      const payload = { ...formInput, uid: user.uid };
-      createAd(payload).then(() => {
-        router.push('/');
+      const payload = { ...formInput, uid };
+      createAd(payload).then(({ name }) => {
+        const patchPayload = { firebaseKey: name };
+        updateAd(patchPayload).then(() => {
+          getSingleAd(uid).then((adData) => {
+            setUser(adData);
+            router.push('/');
+          });
+        });
       });
     }
   };
