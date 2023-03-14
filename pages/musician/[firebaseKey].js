@@ -16,7 +16,7 @@ export default function ViewMusician() {
 
   // TODO: make call to API layer to get the data
   useEffect(() => {
-    viewMusicianDetails(firebaseKey).then(setMusicianDetails);
+    viewMusicianDetails(firebaseKey).then(console.warn);
   }, [firebaseKey]);
 
   return (
