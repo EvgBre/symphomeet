@@ -44,8 +44,8 @@ const createMusician = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSingleMusician = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/musicians.json?orderBy="uid"&equalTo="${uid}"`, {
+const getSingleMusician = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/musicians/${firebaseKey}.json`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -54,9 +54,9 @@ const getSingleMusician = (uid) => new Promise((resolve, reject) => {
     .then((response) => response.json())
     .then((data) => {
       if (data) {
-        resolve(Object.values(data));
+        resolve(data);
       } else {
-        resolve([]);
+        resolve({});
       }
     }).catch(reject);
 });
@@ -86,16 +86,21 @@ const updateMusician = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getMusicianAds = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/ads.json?orderBy="uid"&equalTo="${firebaseKey}"`, {
+const getMusicianAds = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/ads.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
-    .catch(reject);
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    }).catch(reject);
 });
 export {
   getMusicians,
