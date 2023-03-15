@@ -43,7 +43,7 @@ function AdForm({ obj }) {
         updateAd(patchPayload).then(() => {
           getSingleAd(uid).then((adData) => {
             setUser(adData);
-            router.push('/');
+            router.push('/ads');
           });
         });
       });
@@ -55,7 +55,7 @@ function AdForm({ obj }) {
       <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Ad</h2>
 
       {/* NAME INPUT  */}
-      <FloatingLabel controlId="floatingInput1" label="Book Title" className="mb-3">
+      <FloatingLabel controlId="floatingInput1" label="Ad Title" className="mb-3">
         <Form.Control
           type="text"
           placeholder="Enter a title"

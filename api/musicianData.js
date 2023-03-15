@@ -61,6 +61,23 @@ const getSingleMusician = (firebaseKey) => new Promise((resolve, reject) => {
     }).catch(reject);
 });
 
+const getSingleMusicianByUid = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/musicians.json?orderBy="uid"&equalTo="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data)[0]);
+      } else {
+        resolve({});
+      }
+    }).catch(reject);
+});
+
 const deleteSingleMusician = (firebaseKey) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/musicians/${firebaseKey}.json`, {
     method: 'DELETE',
@@ -110,4 +127,5 @@ export {
   updateMusician,
   getMusicianAds,
   getMusicianLogin,
+  getSingleMusicianByUid,
 };

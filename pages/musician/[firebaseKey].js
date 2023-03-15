@@ -16,9 +16,9 @@ export default function ViewMusician() {
 
   // TODO: make call to API layer to get the data
   useEffect(() => {
-    viewMusicianDetails(firebaseKey).then(console.warn);
+    viewMusicianDetails(firebaseKey).then(setMusicianDetails);
   }, [firebaseKey]);
-
+  console.warn('View', musicianDetails);
   return (
     <div className="mt-5 d-flex flex-wrap">
       <div className="d-flex flex-column">
@@ -26,7 +26,7 @@ export default function ViewMusician() {
       </div>
       <div className="text-black ms-5 details">
         <h5>
-          {musicianDetails.musicianObject?.name}
+          {musicianDetails?.name}
         </h5>
         Musician Instrument: <a href={musicianDetails.instrument}>{musicianDetails.instrument}</a>
       </div>

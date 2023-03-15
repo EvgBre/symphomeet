@@ -9,7 +9,7 @@ const viewAdDetails = (adFirebaseKey) => new Promise((resolve, reject) => {
 
 const viewMusicianDetails = (musicianFirebaseKey) => new Promise((resolve, reject) => {
   getSingleMusician(musicianFirebaseKey).then((musicianObject) => {
-    getMusicianAds(musicianObject.uid).then((ads) => console.warn[{ ...musicianObject, ads }]);
+    getMusicianAds(musicianObject.uid).then((ads) => resolve({ ...musicianObject, ads }));
   }).catch((error) => reject(error));
 });
 
