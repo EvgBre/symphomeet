@@ -7,7 +7,7 @@ import { deleteMusicianAds } from '../api/mergedData';
 export default function MusicianCard({ musicianObj, onUpdate }) {
   const deleteThisMusician = () => {
     if (window.confirm(`Delete ${musicianObj.name}?`)) {
-      deleteMusicianAds(musicianObj.firebaseKey).then(() => onUpdate());
+      deleteMusicianAds(musicianObj).then(() => onUpdate());
     }
   };
   return (

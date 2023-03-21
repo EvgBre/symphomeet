@@ -12,7 +12,7 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
   if (userLoading) {
     return <Loading />;
   }
-
+  console.warn(user);
   if (user === 'NO USER') {
     return <MusicianForm user={user} />;
   }

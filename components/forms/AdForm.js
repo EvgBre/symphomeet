@@ -43,7 +43,7 @@ function AdForm({ obj }) {
         updateAd(patchPayload).then(() => {
           getSingleAd(uid).then((adData) => {
             setUser(adData);
-            router.push('/');
+            router.push('/ads');
           });
         });
       });
@@ -52,10 +52,10 @@ function AdForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Ad</h2>
+      <h2 className="text-black mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Ad</h2>
 
       {/* NAME INPUT  */}
-      <FloatingLabel controlId="floatingInput1" label="Book Title" className="mb-3">
+      <FloatingLabel controlId="floatingInput1" label="Ad Title" className="mb-3">
         <Form.Control
           type="text"
           placeholder="Enter a title"
@@ -68,14 +68,24 @@ function AdForm({ obj }) {
 
       {/* CHAMBER INPUT  */}
       <FloatingLabel controlId="floatingInput3" label="Ad Chamber" className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Enter chamber preferences..."
+        <Form.Select
+          aria-label="Chamber"
+          className="mb-3"
           name="chamber"
           value={formInput.chamber}
           onChange={handleChange}
           required
-        />
+        ><option value="">Select a Chamber Preference</option>
+          <option value="Duet">Duet</option>
+          <option value="Trio">Trio</option>
+          <option value="Quartet">Quartet</option>
+          <option value="Quintet">Quintet</option>
+          <option value="Sextet">Sextet</option>
+          <option value="Septet">Septet</option>
+          <option value="Octet">Octet</option>
+          <option value="Nonet">Nonet</option>
+          <option value="Decet">Decet</option>
+        </Form.Select>
       </FloatingLabel>
 
       <FloatingLabel controlId="floatingTextarea" label="Description" className="mb-3">
@@ -92,7 +102,7 @@ function AdForm({ obj }) {
 
       {/* A WAY TO HANDLE UPDATES FOR TOGGLES, RADIOS, ETC  */}
       <Form.Check
-        className="text-white mb-3"
+        className="text-black mb-3"
         type="switch"
         id="public"
         name="public"

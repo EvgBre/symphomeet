@@ -5,7 +5,7 @@ import { signOut } from '../utils/auth';
 
 export default function NavBar() {
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-md">
       <div className="container-fluid">
         <Link passHref href="/">
           <a className="navbar-brand" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
@@ -17,7 +17,7 @@ export default function NavBar() {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <ul className="navbar-nav me-auto">
+          <ul className="navbar-nav me-auto d-flex justify-content-evenly">
             <li className="nav-item">
               <Link passHref href="/musicians">
                 <a className="nav-link">
@@ -39,7 +39,7 @@ export default function NavBar() {
                 </a>
               </Link>
             </li>
-            <button type="button" className="btn btn-danger" onClick={signOut}>
+            <button type="button" className="btn" onClick={signOut}>
               Sign Out
             </button>
           </ul>

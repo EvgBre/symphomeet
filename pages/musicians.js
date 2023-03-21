@@ -5,7 +5,11 @@ import MusicianCard from '../components/MusicianCard';
 
 export default function ShowMusicians() {
   const [musicians, setMusicians] = useState([]);
+  // const [ setUser ] = useAuth;
 
+  // const onDelete = () => {
+  //  getMusicians().then
+  // }
   const getAllMusicians = () => {
     getMusicians().then(setMusicians);
   };
