@@ -3,16 +3,16 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { getAds } from '../api/adData';
-import { useAuth } from '../utils/context/authContext';
+// import { useAuth } from '../utils/context/authContext';
 import AdCard from '../components/AdCard';
 
 export default function ShowAds() {
   const [ads, setAds] = useState([]);
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   const getAllTheAds = () => {
-    getAds(user.uid).then(setAds);
+    getAds().then(setAds);
   };
 
   useEffect(() => {

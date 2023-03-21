@@ -2,9 +2,9 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-const getAds = (uid) => new Promise((resolve, reject) => {
+const getAds = () => new Promise((resolve, reject) => {
   // eslint-disable-next-line no-template-curly-in-string
-  fetch(`${endpoint}/ads.json?orderBy="uid"&equalTo="${uid}"`, {
+  fetch(`${endpoint}/ads.json`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
