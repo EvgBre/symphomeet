@@ -12,9 +12,9 @@ function Signin() {
         margin: '0 auto',
       }}
     >
-      <h1>Hi there!</h1>
-      <p>Click the button below to login!</p>
-      <button type="button" className="btn btn-primary btn-lg copy-btn" onClick={signIn}>
+      <h1>Hello there!</h1>
+      <p>Click the button below to join the Classical Community of Nashville!</p>
+      <button type="button" className="btn btn-lg copy-btn" onClick={signIn}>
         Sign In
       </button>
     </div>

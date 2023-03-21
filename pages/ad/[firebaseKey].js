@@ -17,7 +17,7 @@ export default function ViewAd() {
     <div className="mt-5 d-flex flex-wrap">
       <div className="text-black ms-5 details">
         <h5>
-          {adDetails.name} Created by {adDetails.musicianObject[0]?.name}
+          {adDetails.name} Created by {adDetails.musicianObject?.name}
         </h5>
         Preferred Chamber: <p>{adDetails?.chamber}</p>
         <p>{adDetails.description || ''}</p>

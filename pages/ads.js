@@ -25,7 +25,7 @@ export default function ShowAds() {
         <Button>Make an Ad</Button>
       </Link>
       <div className="d-flex flex-wrap">
-        {ads.map((ad) => (
+        {ads?.map((ad) => (
           <AdCard key={ad.firebaseKey} adObj={ad} onUpdate={getAllTheAds} />
         ))}
       </div>

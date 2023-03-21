@@ -18,7 +18,7 @@ export default function ViewMusician() {
   useEffect(() => {
     viewMusicianDetails(firebaseKey).then(setMusicianDetails);
   }, [firebaseKey]);
-  console.warn('View', musicianDetails);
+
   return (
     <div className="mt-5 d-flex flex-wrap">
       <div className="d-flex flex-column">

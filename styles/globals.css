@@ -17,6 +17,38 @@ a {
   box-sizing: border-box;
 }
 
+.btn {
+  color: #d4961c;
+  background-color: #198068;
+  font-family: Serif;
+  
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.navbar-expand-md {
+  background-color: #198068;
+  font-family: Serif;
+}
+
+.navbar-nav .btn {
+  font-size: large;
+}
+
+.navbar-nav .nav-link {
+  color: azure;
+  font-size: large;
+}
+
+.navbar-brand {
+  color: #d4961c;
+}
+
 body {
   background-color: white;
 }

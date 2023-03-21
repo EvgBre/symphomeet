@@ -17,12 +17,12 @@ function AdCard({ adObj, onUpdate }) {
         <Card.Title>{adObj.name}</Card.Title>
         <p className="card-text bold">{adObj.chamber}</p>
         <Link href={`/ad/${adObj.firebaseKey}`} passHref>
-          <Button variant="primary" className="m-2">VIEW</Button>
+          <Button className="view-button m-2">VIEW</Button>
         </Link>
         <Link href={`/ad/edit/${adObj.firebaseKey}`} passHref>
-          <Button variant="info">EDIT</Button>
+          <Button className="edit-button">EDIT</Button>
         </Link>
-        <Button variant="danger" onClick={deleteThisAd} className="m-2">
+        <Button onClick={deleteThisAd} className="delete-button m-2">
           DELETE
         </Button>
       </Card.Body>
