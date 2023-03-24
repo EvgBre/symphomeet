@@ -1,10 +1,25 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
+import { useAuth } from '../utils/context/authContext';
 import { deleteMusicianAds } from '../api/mergedData';
+import { getMusicians } from '../api/musicianData';
 
 export default function MusicianCard({ musicianObj, onUpdate }) {
+  const { user } = useAuth();
+  const [, setAppMusician] = useState([]);
+  const getAppMusician = () => {
+    getMusicians().then((musicianArr) => {
+      const appMusicianObj = musicianArr.find(() => musicianObj.uid === user.uid);
+      setAppMusician(appMusicianObj);
+    });
+  };
+  useEffect(() => {
+    getAppMusician();
+  }, [user]);
+
   const deleteThisMusician = () => {
     if (window.confirm(`Delete ${musicianObj.name}?`)) {
       deleteMusicianAds(musicianObj).then(() => onUpdate());
@@ -17,16 +32,14 @@ export default function MusicianCard({ musicianObj, onUpdate }) {
         <Card.Title>{musicianObj.name}</Card.Title>
         <Card.Text>{musicianObj.instrument}</Card.Text>
         <Card.Text>{musicianObj.bio}</Card.Text>
-        {/* DYNAMIC LINK TO VIEW THE BOOK DETAILS  */}
         <Link href={`/musician/${musicianObj.firebaseKey}`} passHref>
-          <Button variant="primary" className="m-2">VIEW</Button>
+          <Button variant="primary" className="m-2">View</Button>
         </Link>
-        {/* DYNAMIC LINK TO EDIT THE BOOK DETAILS  */}
         <Link href={`/musician/edit/${musicianObj.firebaseKey}`} passHref>
-          <Button variant="info">EDIT</Button>
+          <Button variant="info">Edit</Button>
         </Link>
         <Button variant="danger" onClick={deleteThisMusician} className="m-2">
-          REMOVE
+          Remove
         </Button>
       </Card.Body>
     </Card>
