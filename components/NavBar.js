@@ -8,9 +8,9 @@ export default function NavBar() {
     <nav className="navbar navbar-expand-md">
       <div className="container-fluid">
         <Link passHref href="/">
-          <a className="navbar-brand" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
+          <h1 className="navbar-brand" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
             SymphoMeet
-          </a>
+          </h1>
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />

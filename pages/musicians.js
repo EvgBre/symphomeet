@@ -21,7 +21,7 @@ export default function ShowMusicians() {
 
   return (
     <div className="text-center my-4">
-      <div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row' }}>
         {musicians.map((musician) => (
           <MusicianCard key={musician.firebaseKey} musicianObj={musician} onUpdate={getAllMusicians} />
         ))}
