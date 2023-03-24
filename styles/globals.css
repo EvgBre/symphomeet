@@ -45,6 +45,10 @@ a {
   font-size: large;
 }
 
+.navbar-brand:hover {
+  cursor: pointer;
+}
+
 .navbar-brand {
   color: #d4961c;
 }

@@ -25,24 +25,37 @@ export default function MusicianCard({ musicianObj, onUpdate }) {
       deleteMusicianAds(musicianObj).then(() => onUpdate());
     }
   };
+
+  const isCurrentUser = musicianObj.uid === user.uid;
+
   return (
-    <Card style={{ width: '18rem', margin: '10px' }}>
-      <Card.Img variant="top" src={musicianObj.image} alt={musicianObj.name} style={{ height: '400px' }} />
-      <Card.Body>
-        <Card.Title>{musicianObj.name}</Card.Title>
-        <Card.Text>{musicianObj.instrument}</Card.Text>
-        <Card.Text>{musicianObj.bio}</Card.Text>
-        <Link href={`/musician/${musicianObj.firebaseKey}`} passHref>
-          <Button variant="primary" className="m-2">View</Button>
-        </Link>
-        <Link href={`/musician/edit/${musicianObj.firebaseKey}`} passHref>
-          <Button variant="info">Edit</Button>
-        </Link>
-        <Button variant="danger" onClick={deleteThisMusician} className="m-2">
-          Remove
-        </Button>
-      </Card.Body>
-    </Card>
+    <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row' }}>
+      <Card style={{
+        width: '18rem', margin: '10px',
+      }}
+      >
+        <Card.Img variant="top" src={musicianObj.image} alt={musicianObj.name} style={{ height: '200px' }} />
+        <Card.Body style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <Card.Title>{musicianObj.name}</Card.Title>
+          <Card.Text>{musicianObj.instrument}</Card.Text>
+          <div className="d-flex flex-row justify-content-evenly">
+            <Link href={`/musician/${musicianObj.firebaseKey}`} passHref>
+              <Button className="m-2 flex-grow-1" style={{ maxWidth: '80px' }}>View</Button>
+            </Link>
+            {isCurrentUser && (
+            <>
+              <Link href={`/musician/edit/${musicianObj.firebaseKey}`} passHref>
+                <Button className="m-2 flex-grow-1" style={{ maxWidth: '80px' }}>Edit</Button>
+              </Link>
+              <Button onClick={deleteThisMusician} className="m-2 flex-grow-1" style={{ maxWidth: '80px' }}>
+                Remove
+              </Button>
+            </>
+            )}
+          </div>
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
 
