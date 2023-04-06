@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
 import { useAuth } from '../utils/context/authContext';
-import { deleteMusicianAds } from '../api/mergedData';
 import { getMusicians } from '../api/musicianData';
 
-export default function MusicianCard({ musicianObj, onUpdate }) {
+export default function MusicianCard({ musicianObj }) {
   const { user } = useAuth();
   const [, setAppMusician] = useState([]);
   const getAppMusician = () => {
@@ -19,14 +18,6 @@ export default function MusicianCard({ musicianObj, onUpdate }) {
   useEffect(() => {
     getAppMusician();
   }, [user]);
-
-  const deleteThisMusician = () => {
-    if (window.confirm(`Delete ${musicianObj.name}?`)) {
-      deleteMusicianAds(musicianObj).then(() => onUpdate());
-    }
-  };
-
-  const isCurrentUser = musicianObj.uid === user.uid;
 
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row' }}>
@@ -42,16 +33,6 @@ export default function MusicianCard({ musicianObj, onUpdate }) {
             <Link href={`/musician/${musicianObj.firebaseKey}`} passHref>
               <Button className="m-2 flex-grow-1" style={{ maxWidth: '80px' }}>View</Button>
             </Link>
-            {isCurrentUser && (
-            <>
-              <Link href={`/musician/edit/${musicianObj.firebaseKey}`} passHref>
-                <Button className="m-2 flex-grow-1" style={{ maxWidth: '80px' }}>Edit</Button>
-              </Link>
-              <Button onClick={deleteThisMusician} className="m-2 flex-grow-1" style={{ maxWidth: '80px' }}>
-                Remove
-              </Button>
-            </>
-            )}
           </div>
         </Card.Body>
       </Card>
@@ -68,5 +49,4 @@ MusicianCard.propTypes = {
     bio: PropTypes.string,
     uid: PropTypes.string,
   }).isRequired,
-  onUpdate: PropTypes.func.isRequired,
 };
