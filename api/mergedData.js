@@ -15,13 +15,13 @@ const viewMusicianDetails = (musicianFirebaseKey) => new Promise((resolve, rejec
   }).catch((error) => reject(error));
 });
 
-const deleteMusicianAds = (musicianObj) => new Promise((resolve, reject) => {
-  getMusicianAds(musicianObj.uid).then((AdsArray) => {
+const deleteMusicianAds = (firebaseKey) => new Promise((resolve, reject) => {
+  getMusicianAds(firebaseKey).then((AdsArray) => {
     console.warn(AdsArray, 'Musician Ads');
     const deleteAdPromises = AdsArray.map((ad) => deleteAd(ad.firebaseKey));
 
     Promise.all(deleteAdPromises).then(() => {
-      deleteSingleMusician(musicianObj.firebaseKey).then(resolve);
+      deleteSingleMusician(firebaseKey).then(resolve);
     });
   }).catch(reject);
 });

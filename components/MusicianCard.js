@@ -25,7 +25,7 @@ export default function MusicianCard({ musicianObj }) {
         width: '18rem', margin: '10px',
       }}
       >
-        <Card.Img variant="top" src={musicianObj.image} alt={musicianObj.name} style={{ height: '200px' }} />
+        <Card.Img variant="top" src={musicianObj.image} alt={musicianObj.name} style={{ width: '175px', height: '175px', margin: 'auto' }} className="rounded-circle mt-3" />
         <Card.Body style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <Card.Title>{musicianObj.name}</Card.Title>
           <Card.Text>{musicianObj.instrument}</Card.Text>

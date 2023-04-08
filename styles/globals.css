@@ -24,6 +24,23 @@ a {
   
 }
 
+.m-2:hover {
+  background-color: black;
+  color: white;
+}
+
+.view-button:hover,
+.edit-button:hover,
+.delete-button:hover {
+  background-color: black;
+  color: white;
+}
+
+.make-an-ad-button:hover {
+  background-color: black;
+  color: white;
+}
+
 .navbar-nav {
   display: flex;
   justify-content: space-between;
@@ -55,4 +72,9 @@ a {
 
 body {
   background-color: white;
+}
+
+.adcardcontainer, .musiciancardcontainer {
+  display: flex;
+  flex-wrap: wrap;
 }
