@@ -35,11 +35,11 @@ function AdCard({ adObj, onUpdate }) {
           <Button className="view-button m-2">View Details</Button>
         </Link>
         <Link href={`/ad/edit/${adObj.firebaseKey}`} passHref>
-          {adObj.uid === appMusician.uid ? (<Button className="edit-button">EDIT</Button>) : ''}
+          {adObj.uid === appMusician.uid ? (<Button className="edit-button">Edit</Button>) : ''}
         </Link>
         {adObj.uid === appMusician.uid ? (
           <Button onClick={deleteThisAd} className="delete-button m-2">
-            DELETE
+            Delete
           </Button>
         ) : ''}
       </Card.Body>

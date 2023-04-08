@@ -12,7 +12,7 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
   if (userLoading) {
     return <Loading />;
   }
-  console.warn(user);
+
   if (user === 'NO USER') {
     return <MusicianForm user={user} />;
   }
@@ -20,7 +20,7 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
   if (user) {
     return (
       <>
-        <NavBar /> {/* NavBar only visible if user is logged in and is in every view */}
+        <NavBar user={user} /> {/* NavBar only visible if user is logged in and is in every view */}
         <div className="container">
           <Component {...pageProps} />
         </div>
