@@ -1,38 +1,44 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { viewMusicianDetails, deleteMusicianAds } from '../../api/mergedData';
 import AdCard from '../../components/AdCard';
 import { useAuth } from '../../utils/context/authContext';
+import { getSingleMusician } from '../../api/musicianData';
 
-export default function ViewMusician({ musicianObj }) {
+export default function ViewMusician() {
   const { user } = useAuth();
-  const [musicianDetails, setMusicianDetails] = useState([]);
+  const [appMusician, setAppMusician] = useState([]);
   const router = useRouter();
-
   const { firebaseKey } = router.query;
-  const viewMusicianAds = () => {
-    viewMusicianDetails(firebaseKey).then(setMusicianDetails);
+  const getAppMusician = () => {
+    getSingleMusician(firebaseKey).then(setAppMusician);
   };
+  useEffect(() => {
+    getAppMusician();
+  }, [firebaseKey]);
+
+  const [ads] = useState([]);
+  const getMusicianAds = () => {
+    viewMusicianDetails(firebaseKey).then(setAppMusician);
+  };
+  useEffect(() => {
+    getMusicianAds();
+  }, [appMusician]);
 
   const deleteThisMusician = () => {
     if (window.confirm('Are you sure you want to delete your account? This action is irreversible.')) {
-      deleteMusicianAds(musicianObj);
+      deleteMusicianAds(appMusician.firebaseKey);
     }
   };
-
-  useEffect(() => {
-    viewMusicianDetails(firebaseKey).then(setMusicianDetails);
-  }, [firebaseKey]);
 
   return (
     <div className="mt-5 d-flex flex-wrap" style={{ width: 'auto' }}>
       <div className="d-flex flex-column" style={{ flexBasis: '30%' }}>
-        <img src={musicianDetails.image} alt={musicianDetails.name} style={{ width: '275px', height: '275px' }} className="rounded-circle mt-3" />
+        <img src={appMusician.image} alt={appMusician.name} style={{ width: '275px', height: '275px' }} className="rounded-circle mt-3" />
       </div>
       <div
         className="text-black ms-5 details"
@@ -41,17 +47,17 @@ export default function ViewMusician({ musicianObj }) {
         }}
       >
         <h5>
-          {musicianDetails?.name}
+          {appMusician?.name}
         </h5>
         <div style={{ marginBottom: '10px' }}>
-          <span style={{ fontWeight: 'bold' }}>Musician Instrument:</span> {musicianDetails.instrument}
+          <span style={{ fontWeight: 'bold' }}>Musician Instrument:</span> {appMusician.instrument}
         </div>
         <div style={{ marginBottom: '10px' }}>
-          <span style={{ fontWeight: 'bold' }}>Bio:</span> {musicianDetails.bio}
+          <span style={{ fontWeight: 'bold' }}>Bio:</span> {appMusician.bio}
         </div>
         <div className="d-flex" style={{ width: '70%', justifyContent: 'space-between' }}>
-          {user.uid === musicianDetails.uid ? (
-            <Link href={`/musician/edit/${musicianDetails.firebaseKey}`} passHref>
+          {user.uid === appMusician.uid ? (
+            <Link href={`/musician/edit/${appMusician.firebaseKey}`} passHref>
               <Button className="m-2" style={{ height: '50px', width: '140px' }}>
                 <div className="d-flex align-items-center justify-content-center" style={{ height: '100%' }}>
                   Edit Profile
@@ -59,7 +65,7 @@ export default function ViewMusician({ musicianObj }) {
               </Button>
             </Link>
           ) : ''}
-          {user.uid === musicianDetails.uid ? (
+          {user.uid === appMusician.uid ? (
             <Button onClick={deleteThisMusician} className="m-2" style={{ height: '50px', width: '140px' }}>
               Delete Account
             </Button>
@@ -68,22 +74,11 @@ export default function ViewMusician({ musicianObj }) {
       </div>
       <hr style={{ flexBasis: '100%', borderBottom: '1px solid black' }} />
       <div className="d-flex flex-wrap">
-        {musicianDetails.ads?.map((ad) => (
-          <AdCard key={ad.firebaseKey} adObj={ad} onUpdate={viewMusicianAds} />
-        ))}
+        {ads.length === 0 ? (<p>No ads found</p>)
+          : (appMusician.ads?.map((ad) => (
+            <AdCard key={ad.firebaseKey} adObj={ad} onUpdate={getMusicianAds} />
+          )))}
       </div>
     </div>
   );
 }
-
-ViewMusician.propTypes = {
-  musicianObj: PropTypes.shape({
-    firebaseKey: PropTypes.string,
-    name: PropTypes.string,
-    image: PropTypes.string,
-    instrument: PropTypes.string,
-    bio: PropTypes.string,
-    uid: PropTypes.string,
-  }).isRequired,
-
-};
